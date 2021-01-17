@@ -28,6 +28,12 @@ topy -d -last{-first }: Archive the last todo
 
 topy -c —clear : Archive all todos
 
+# How to install
+
+First you need to clone this repository.  
+And run the command `pip install -e .` inside the folder.  
+That's it! You'll be able to run the `topy` command from any where in you machine.
+
 # Where we store data
 
 We will use a file for data storage for the first version.  
