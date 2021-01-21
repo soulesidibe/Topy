@@ -2,7 +2,7 @@
 
 Yet another todo app. Topy is a small command line todo app
 
-# Why?
+# Why
 
 Learn Python
 
@@ -16,23 +16,21 @@ A small todo app in command line
 - Add a todo
 - Archive a todo
 
-# How to use it
+# How
 
-topy -l —list : show the list of todos
+topy get -l --list : show the list of todos
 
-topy -a —add : Prompt the user to add a todo and show the update list of todo
+topy get --last : show the list of todos
 
-topy -d 4: Archive the fourth todo
+topy get -n : Show the four first todo
 
-topy -d -last{-first }: Archive the last todo
+topy new : Add a todo and show the update list of todo
 
-topy -c —clear : Archive all todos
+topy archive -n 4: Archive the fourth todo
 
-# How to install
+topy archive --last: Archive the last todo
 
-First you need to clone this repository.  
-And run the command `pip install -e .` inside the folder.  
-That's it! You'll be able to run the `topy` command from any where in you machine.
+topy archive --clear : Archive all todos
 
 # Where we store data
 
