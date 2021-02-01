@@ -1,14 +1,6 @@
-import datetime as dt
-import uuid
-
 import click
 
-
-class Todo:
-    def __init__(self, name):
-        self.uuid = str(uuid.uuid4())
-        self.name = name
-        self.date = str(dt.datetime.utcnow())
+from topy.model.todo import Todo, add_todo, get_all_todos, archive_todo
 
 
 @click.group()
@@ -23,8 +15,11 @@ def main():
 def new(todo_name):
     """Add a todo to Topy"""
     todo = Todo(todo_name)
-    click.echo(
-        f"Hello man you just created a new todo: \nName: {todo.name} \nCreated at: {todo.date} \nUuid={todo.uuid}")
+    result = add_todo(todo)
+    if result:
+        click.echo(f"Todo created: \nName: {todo.name} \nCreated at: {todo.date} \nUuid={todo.uuid}")
+    else:
+        click.echo("New todo not created. Please try again. Sorry :(")
 
 
 @main.command()
@@ -33,7 +28,7 @@ def new(todo_name):
 @click.option('--clear', '-c', is_flag=True, help='Archive all todos')
 def archive(clear, last, number):
     """Topy menu that allows you to archive one or multiple todos"""
-    pass
+    archive_todo(clear, last, number)
 
 
 @main.command()
@@ -42,14 +37,9 @@ def archive(clear, last, number):
 @click.option("-n", 'number', type=int, help='return the n todos')
 def get(full, last, number):
     """Display your todos"""
-    if full:
-        click.echo(f"return the all todos available")
-    elif last:
-        click.echo(f"return the last todo available")
-    elif number is not None:
-        click.echo(f"return the {number} todos available")
-    else:
-        click.echo(click.style("No argument passed", fg='red'))
+    all_todos = get_all_todos(full, last, number)
+    for todo in all_todos:
+        click.echo(f"{todo.name}. Created at {todo.date}\n")
 
 
 if __name__ == '__main__':
